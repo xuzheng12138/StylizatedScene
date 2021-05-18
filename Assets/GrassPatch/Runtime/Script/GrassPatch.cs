@@ -14,6 +14,7 @@ namespace LXGrassPatch
         private Mesh m_meshInstance;
         private MeshFilter meshFilter => GetMeshFilter();
 
+
         private MeshFilter GetMeshFilter()
         {
             if (m_meshFilter == null) m_meshFilter = GetComponent<MeshFilter>();
@@ -38,5 +39,7 @@ namespace LXGrassPatch
                 _sharedMesh.colors = m_verticesColor.ToArray();
             }
         }
+
+        private void Update() => RefreshColor();
     }
 }
