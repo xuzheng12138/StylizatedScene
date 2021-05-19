@@ -7,11 +7,11 @@ Shader "Universal Render Pipeline/Stylizated/StoneLit"
     Properties
     {
         [MainTexture] _BaseMap("_BaseMap", 2D) = "white" {}
-        _BaseNormalMap("_BaseNormal", 2D) = "white" {}
+        _BaseNormalMap("_BaseNormal", 2D) = "bump" {}
         [HDR]_BaseColor("_BaseColor", Color) = (1, 1, 1, 1)
 
         _MappingMap("_MappingMap", 2D) = "white" {}
-        _MappingNormalMap("_MappingNormalMap", 2D) = "white" {}
+        _MappingNormalMap("_MappingNormalMap", 2D) = "bump" {}
         [HDR]_MappingColor("_MappingColor", Color) = (1, 1, 1, 1)
         _MappingPower("_MappingPower", Range(1, 10)) = 1
         _MappingMinClip("_MappingMinClip", Range(0, 1)) = 0.3
@@ -26,7 +26,6 @@ Shader "Universal Render Pipeline/Stylizated/StoneLit"
     {
         Tags
         {
-            "RenderType" = "Opaque" 
             "RenderPipeline" = "UniversalPipeline" 
         }
         Pass
@@ -40,7 +39,6 @@ Shader "Universal Render Pipeline/Stylizated/StoneLit"
             HLSLPROGRAM
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            /// 软阴影
             #pragma multi_compile _ _SHADOWS_SOFT
             #pragma multi_compile_fog
 
@@ -50,6 +48,7 @@ Shader "Universal Render Pipeline/Stylizated/StoneLit"
             #include "Library/StylizatedStoneLit.hlsl"
             ENDHLSL
         }
+        UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }
     CustomEditor "StylizatedScene.Editor.StoneGUI"
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
